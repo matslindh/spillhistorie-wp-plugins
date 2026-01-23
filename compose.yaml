@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: wp_plugin_dev_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: localwp
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppassword
+    volumes:
+      - db_data:/var/lib/mysql
+  wordpress:
+    image: wordpress:latest
+    container_name: wp_plugin_dev_app
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppassword
+      WORDPRESS_DB_NAME: localwp
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wp_data:/var/www/html
+      - ./sh-article-series:/var/www/html/wp-content/plugins/sh-article-series
+volumes:
+  db_data:
+  wp_data:
