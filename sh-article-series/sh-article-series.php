@@ -90,7 +90,9 @@ function sh_series_shortcode_handler( $atts ) {
             $output .= '<h3 class="sh-series-title">' . esc_html( $atts['title'] ) . '</h3>';
         }
 
-        $output .= '<ol>';
+        $direction_part = $atts['sort'] === 'desc' ? ' reversed' : '';
+
+        $output .= '<ol' . $direction_part . '>';
 
         while ( $query->have_posts() ) {
             $query->the_post();
