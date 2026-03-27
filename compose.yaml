@@ -27,6 +27,7 @@ services:
     volumes:
       - wp_data:/var/www/html
       - ./sh-article-series:/var/www/html/wp-content/plugins/sh-article-series
+      - ./sh-notices:/var/www/html/wp-content/plugins/sh-notices
 volumes:
   db_data:
   wp_data:
