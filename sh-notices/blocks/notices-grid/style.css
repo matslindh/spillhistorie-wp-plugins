@@ -1,0 +1,186 @@
+/*
+ * SH Notices – Notices Grid block – front-end styles (style.css)
+ * Loaded on both front end and in the block editor canvas.
+ *
+ * Design: clean editorial card grid. Sharp left-border accent on each card,
+ * generous whitespace, crisp typography. Cards lift slightly on hover.
+ * Mobile: 1 or 2 columns controlled via --grid-mobile-cols custom property.
+ */
+
+/* ── Custom properties ──────────────────────────────────────────────── */
+.sh-notices-grid {
+	--ng-accent:       #1a6ebd;
+	--ng-accent-light: #e8f1fb;
+	--ng-text:         #111827;
+	--ng-meta:         #6b7280;
+	--ng-border:       #e5e7eb;
+	--ng-card-bg:      #ffffff;
+	--ng-card-radius:  8px;
+	--ng-card-shadow:  0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+	--ng-card-shadow-hover: 0 4px 12px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08);
+	--ng-gap:          1.5rem;
+	--ng-desktop-cols: 3;
+	--ng-mobile-cols:  1;   /* overridden by modifier class */
+
+	font-family: inherit;
+	color:        var(--ng-text);
+}
+
+/* Modifier set by the block attribute mobileColumns */
+.sh-notices-grid--mobile-2 {
+	--ng-mobile-cols: 2;
+}
+
+/* Dark-mode token overrides */
+@media (prefers-color-scheme: dark) {
+	.sh-notices-grid {
+		--ng-text:        #f3f4f6;
+		--ng-meta:        #9ca3af;
+		--ng-border:      #374151;
+		--ng-card-bg:     #1f2937;
+		--ng-accent-light:#1e3a5f;
+		--ng-card-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.2);
+		--ng-card-shadow-hover: 0 4px 16px rgba(0,0,0,0.4);
+	}
+}
+
+/* ── Section heading ────────────────────────────────────────────────── */
+.sh-notices-grid__heading {
+	font-size:      1.05rem;
+	font-weight:    700;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	margin:         0 0 1.25rem;
+	padding-bottom: 0.6rem;
+	border-bottom:  3px solid var(--ng-accent);
+	color:          var(--ng-text);
+}
+
+/* ── Grid list ──────────────────────────────────────────────────────── */
+.sh-notices-grid__list {
+	display:               grid;
+	grid-template-columns: repeat( var(--ng-mobile-cols), 1fr );
+	gap:                   var(--ng-gap);
+	list-style:            none;
+	margin:                0;
+	padding:               0;
+}
+
+@media (min-width: 768px) {
+	.sh-notices-grid__list {
+		grid-template-columns: repeat( var(--ng-desktop-cols), 1fr );
+	}
+}
+
+/* ── Card ───────────────────────────────────────────────────────────── */
+.sh-notices-grid__card {
+	display:          flex;
+	flex-direction:   column;
+	background:       var(--ng-card-bg);
+	border-radius:    var(--ng-card-radius);
+	box-shadow:       var(--ng-card-shadow);
+	border-left:      3px solid var(--ng-accent);
+	overflow:         hidden;
+	transition:       transform 0.2s ease, box-shadow 0.2s ease;
+
+	/* Staggered fade-in on load */
+	animation:        sh-ng-fadein 0.4s ease both;
+	animation-delay:  calc( var(--card-index, 0) * 70ms );
+}
+
+.sh-notices-grid__card:hover {
+	transform:  translateY(-3px);
+	box-shadow: var(--ng-card-shadow-hover);
+}
+
+@keyframes sh-ng-fadein {
+	from { opacity: 0; transform: translateY(8px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Card image ─────────────────────────────────────────────────────── */
+.sh-notices-grid__image-link {
+	display:    block;
+	overflow:   hidden;
+	/* fixed aspect ratio so cards without images don't shift */
+	aspect-ratio: 16 / 9;
+}
+
+.sh-notices-grid__image {
+	width:      100%;
+	height:     100%;
+	object-fit: cover;
+	display:    block;
+	transition: transform 0.35s ease;
+}
+
+.sh-notices-grid__card:hover .sh-notices-grid__image {
+	transform: scale(1.04);
+}
+
+/* ── Card body ──────────────────────────────────────────────────────── */
+.sh-notices-grid__body {
+	display:        flex;
+	flex-direction: column;
+	flex:           1;
+	padding:        1rem 1.1rem 1.1rem;
+	gap:            0.35rem;
+}
+
+/* ── Title ──────────────────────────────────────────────────────────── */
+.sh-notices-grid__title {
+	margin:      0;
+	font-size:   0.95rem;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.sh-notices-grid__title a {
+	color:           var(--ng-text);
+	text-decoration: none;
+}
+
+.sh-notices-grid__title a:hover,
+.sh-notices-grid__title a:focus-visible {
+	color:           var(--ng-accent);
+	text-decoration: underline;
+}
+
+/* ── Excerpt ────────────────────────────────────────────────────────── */
+.sh-notices-grid__excerpt {
+	margin:             0;
+	font-size:          0.83rem;
+	color:              var(--ng-meta);
+	line-height:        1.5;
+	overflow:           hidden;
+}
+
+/* ── Date ───────────────────────────────────────────────────────────── */
+.sh-notices-grid__date {
+	display:    block;
+	margin-top: auto;          /* push to bottom of card body */
+	padding-top: 0.5rem;
+	font-size:  0.73rem;
+	color:      var(--ng-meta);
+	font-variant-numeric: tabular-nums;
+}
+
+/* ── Wide / full alignment ──────────────────────────────────────────── */
+.alignwide .sh-notices-grid__list,
+.alignfull .sh-notices-grid__list {
+	--ng-gap: 2rem;
+}
+
+/* ── 2-column mobile: keep images smaller ───────────────────────────── */
+.sh-notices-grid--mobile-2 .sh-notices-grid__image-link {
+	aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 479px) {
+	.sh-notices-grid--mobile-2 .sh-notices-grid__body {
+		padding: 0.65rem 0.75rem 0.75rem;
+	}
+	.sh-notices-grid--mobile-2 .sh-notices-grid__title {
+		font-size: 0.82rem;
+	}
+}

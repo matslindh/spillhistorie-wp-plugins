@@ -1,0 +1,165 @@
+/* ============================================================
+   SH Notices – front-end styles
+   Designed to sit comfortably inside a GeneratePress sidebar
+   or in the main content flow.
+   ============================================================ */
+
+/* ── Wrapper ── */
+.sh-notices-wrap {
+	--sh-notice-accent:      #1a6ebd;
+	--sh-notice-text:        #1d1d1d;
+	--sh-notice-meta:        #6b7280;
+	--sh-notice-border:      #e5e7eb;
+	--sh-notice-bg:          #ffffff;
+	--sh-notice-hover-bg:    #f0f6ff;
+	--sh-notice-radius:      6px;
+	--sh-notice-thumb-size:  56px;
+	--sh-notice-gap:         0.75rem;
+	--sh-notice-font-size:   0.9rem;
+
+	font-size:   var(--sh-notice-font-size);
+	line-height: 1.55;
+	color:       var(--sh-notice-text);
+}
+
+/* Allow child-themes / GP's colour variables to set the accent */
+@media (prefers-color-scheme: dark) {
+	.sh-notices-wrap {
+		--sh-notice-text:     #e5e7eb;
+		--sh-notice-meta:     #9ca3af;
+		--sh-notice-border:   #374151;
+		--sh-notice-bg:       #1f2937;
+		--sh-notice-hover-bg: #1e3a5f;
+	}
+}
+
+/* ── Section heading ── */
+.sh-notices-heading {
+	font-size:     1rem;
+	font-weight:   700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	margin-top:    0;
+	margin-bottom: 0.75rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid var(--sh-notice-accent);
+	color:         var(--sh-notice-text);
+}
+
+/* ── List reset ── */
+.sh-notices-list {
+	list-style:  none;
+	margin:      0;
+	padding:     0;
+}
+
+/* ── Individual notice ── */
+.sh-notice-item {
+	display:       flex;
+	align-items:   flex-start;
+	gap:           var(--sh-notice-gap);
+	padding-bottom: 8px;
+	margin-bottom: 8px;
+	border-radius: var(--sh-notice-radius);
+	transition:    background 0.15s ease;
+}
+
+.sh-notice-item:last-child {
+	border-bottom: none;
+}
+
+/* ── Thumbnail ── */
+.sh-notice-thumbnail {
+	flex-shrink: 0;
+	display:     block;
+	width:       var(--sh-notice-thumb-size);
+	height:      var(--sh-notice-thumb-size);
+	overflow:    hidden;
+	border-radius: calc(var(--sh-notice-radius) - 1px);
+}
+
+.sh-notice-thumbnail img {
+	width:      100%;
+	height:     100%;
+	object-fit: cover;
+	display:    block;
+}
+
+/* ── Body ── */
+.sh-notice-body {
+	flex: 1;
+	min-width: 0; /* prevent text overflow in flex containers */
+}
+
+/* ── Title link ── */
+.sh-notice-title {
+	margin:      0 0 0.2rem;
+	font-size:   0.9rem;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.sh-notice-title a {
+	color:           var(--sh-notice-text);
+	text-decoration: none;
+}
+
+.sh-notice-title a:hover,
+.sh-notice-title a:focus {
+	color:           var(--sh-notice-accent);
+	text-decoration: underline;
+}
+
+/* ── Excerpt ── */
+.sh-notice-excerpt {
+	margin:    0 0 0.25rem;
+	font-size: 0.82rem;
+	color:     var(--sh-notice-meta);
+	overflow:  hidden;
+}
+
+/* ── Date ── */
+.sh-notice-date {
+	display:     block;
+	font-size:   0.75rem;
+	color:       var(--sh-notice-meta);
+	margin-top:  0.1rem;
+}
+
+/* ── Variation: thumbnail present ── */
+.sh-notice-item--has-thumbnail .sh-notice-body {
+	padding-top: 0;
+}
+
+/* ── When used in the main content flow (wider container) ── */
+.content-area .sh-notices-wrap,
+.entry-content .sh-notices-wrap {
+	--sh-notice-thumb-size: 72px;
+	--sh-notice-font-size:  1rem;
+}
+
+.sh-notices-wrap.inside-article>ul {
+	display: flex;
+	gap: 10px;
+}
+
+@media (max-width: 576px) {
+	.sh-notices-wrap.inside-article>ul {
+		display: flex;
+		gap: 10px;
+		flex-direction: column;
+	}
+
+	.sh-notices-wrap.inside-article .sh-notice-item {
+		padding-bottom: 0;
+		margin-bottom: 0;
+	}
+}
+
+.sh-notices-wrap.inside-article>ul>li {
+	flex: 1 1 0;
+}
+
+.content-area .sh-notice-title {
+	font-size: 1rem;
+}

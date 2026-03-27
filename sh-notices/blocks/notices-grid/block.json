@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sh-notices/notices-grid",
+	"version": "1.0.0",
+	"title": "Notices Grid",
+	"category": "widgets",
+	"icon": "megaphone",
+	"description": "Display recent notices in a responsive grid — three columns on desktop, two on mobile.",
+	"keywords": [ "notices", "grid", "news", "announcements" ],
+	"textdomain": "sh-notices",
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"color": {
+			"background": true,
+			"text": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"background": true,
+				"text": true
+			}
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"blockGap": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true
+		}
+	},
+	"attributes": {
+		"count": {
+			"type": "integer",
+			"default": 3
+		},
+		"showExcerpt": {
+			"type": "boolean",
+			"default": true
+		},
+		"showDate": {
+			"type": "boolean",
+			"default": true
+		},
+		"showThumbnail": {
+			"type": "boolean",
+			"default": true
+		},
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"mobileColumns": {
+			"type": "integer",
+			"default": 1
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

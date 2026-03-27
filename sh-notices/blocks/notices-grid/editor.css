@@ -1,0 +1,20 @@
+/*
+ * SH Notices – Notices Grid block – editor-only styles (editor.css)
+ * Tweaks for the ServerSideRender preview inside the block editor.
+ */
+
+/* Disable animations in the editor canvas to avoid distracting re-renders */
+.sh-notices-grid__card {
+	animation: none !important;
+}
+
+/* Give the editor wrapper a subtle outline when the block is selected */
+.sh-notices-grid-editor-wrap:focus-within {
+	outline: none; /* WP adds its own selection outline */
+}
+
+/* Remove hover transforms inside the editor – they can feel odd on static previews */
+.sh-notices-grid__card:hover {
+	transform:  none;
+	box-shadow: var(--ng-card-shadow);
+}
