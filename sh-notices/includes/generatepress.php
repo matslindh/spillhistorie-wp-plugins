@@ -91,7 +91,7 @@ function sh_notices_maybe_inject_in_loop() {
         static $count = 0;
         $count++;
         if ( $count === $after_n ) {
-            sh_notices_display( [ 'title' => get_option('sh_notices_grid_heading'), 'wrapper_class' => 'inside-article', 'count' => 2 ] );
+            sh_notices_display( [ 'title' => get_option('sh_notices_grid_heading'), 'wrapper_class' => 'generate-columns grid-100 masonry-post', 'inner_class' => 'inside-article', 'count' => 2 ] );
         }
     } );
 }

@@ -45,8 +45,11 @@ function sh_notices_render( array $args = [] ) : string {
 	}
 
 	ob_start();
-	?>
-	<div class="sh-notices-wrap <?php echo ($args['wrapper_class'] ?? ''); ?>">
+?>
+    <?php if ( !empty( $args['wrapper_class'] ) ) : ?>
+        <div class="<?php echo ( $args['wrapper_class'] ); ?>">
+    <?php endif; ?>
+    <div class="sh-notices-wrap <?php echo ( $args['inner_class'] ?? '' ); ?>">
 		<?php if ( ! empty( $args['title'] ) ) : ?>
 			<h2 class="sh-notices-heading"><?php echo esc_html( $args['title'] ); ?></h2>
 		<?php endif; ?>
@@ -81,6 +84,9 @@ function sh_notices_render( array $args = [] ) : string {
 			<?php endwhile; wp_reset_postdata(); ?>
 		</ul>
 	</div>
+    <?php if ( !empty( $args['wrapper_class'] ) ) : ?>
+        </div>
+    <?php endif; ?>
 	<?php
 	return ob_get_clean();
 }
