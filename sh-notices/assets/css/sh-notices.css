@@ -107,6 +107,10 @@
 	overflow:  hidden;
 }
 
+.sh-notice-excerpt a::after {
+	content: "🗗";
+}
+
 /* ── Date ── */
 .sh-notice-date {
 	display:     block;
