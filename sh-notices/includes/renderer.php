@@ -10,6 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function sh_notices_external_links( string $html ) : string {
+    return preg_replace(
+            '/<a\s/i',
+            '<a target="_blank" rel="noopener noreferrer" ',
+            $html
+    );
+}
+
 /**
  * Build and return the notices HTML.
  *
@@ -76,7 +84,7 @@ function sh_notices_render( array $args = [] ) : string {
                         <?php endif; ?>
 
 						<?php if ( $args['show_excerpt'] && get_the_excerpt() ) : ?>
-							<div class="sh-notice-excerpt"><?php echo wp_kses_post( get_the_content() ); ?></div>
+							<div class="sh-notice-excerpt"><?php echo wp_kses_post( sh_notices_external_links( get_the_content() ) ); ?></div>
 						<?php endif; ?>
 
 					</div>
