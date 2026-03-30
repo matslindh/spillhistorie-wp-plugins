@@ -108,7 +108,7 @@
 }
 
 .sh-notice-excerpt a::after {
-	content: "🗗";
+	content: " 🗗";
 }
 
 /* ── Date ── */
