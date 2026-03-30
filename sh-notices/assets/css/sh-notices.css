@@ -22,17 +22,6 @@
 	color:       var(--sh-notice-text);
 }
 
-/* Allow child-themes / GP's colour variables to set the accent */
-@media (prefers-color-scheme: dark) {
-	.sh-notices-wrap {
-		--sh-notice-text:     #e5e7eb;
-		--sh-notice-meta:     #9ca3af;
-		--sh-notice-border:   #374151;
-		--sh-notice-bg:       #1f2937;
-		--sh-notice-hover-bg: #1e3a5f;
-	}
-}
-
 /* ── Section heading ── */
 .sh-notices-heading {
 	font-size:     1rem;
