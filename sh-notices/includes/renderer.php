@@ -37,6 +37,7 @@ function sh_notices_render( array $args = [] ) : string {
 		'show_date'      => (bool) get_option( 'sh_notices_show_date', 1 ),
 		'show_thumbnail' => (bool) get_option( 'sh_notices_show_thumbnail', 1 ),
 		'title'          => '',
+        'go_to_archives_link_text' => get_option('sh_notices_go_to_archive_link_text', 'Archives'),
 	];
 
 	$args = wp_parse_args( $args, $defaults );
@@ -86,11 +87,14 @@ function sh_notices_render( array $args = [] ) : string {
 						<?php if ( $args['show_excerpt'] && get_the_excerpt() ) : ?>
 							<div class="sh-notice-excerpt"><?php echo wp_kses_post( sh_notices_external_links( get_the_content() ) ); ?></div>
 						<?php endif; ?>
-
 					</div>
 				</li>
 			<?php endwhile; wp_reset_postdata(); ?>
 		</ul>
+
+        <div style="text-align: right;">
+            <a href="<?php echo esc_url(get_post_type_archive_link( 'sh_notice' )); ?>"><?php echo esc_html( $args['go_to_archives_link_text'] ); ?> &rarr;</a>
+        </div>
 	</div>
     <?php if ( !empty( $args['wrapper_class'] ) ) : ?>
         </div>

@@ -102,6 +102,21 @@ function sh_notices_register_settings() {
             'sh-notices'
     );
 
+    register_setting( 'sh_notices_options', 'sh_notices_go_to_archive_link_text', [
+            'type'              => 'string',
+            'default'           => '',
+            'sanitize_callback' => 'sanitize_text_field',
+    ] );
+
+    add_settings_field(
+            'sh_notices_go_to_archive_link_text',
+            __( 'Link text for "go to archive link"', 'sh-notices' ),
+            'sh_notices_field_go_to_archive_link_text',
+            'sh-notices',
+            'sh_notices_general'
+    );
+
+
     register_setting( 'sh_notices_options', 'sh_notices_grid_heading', [
             'type'              => 'string',
             'default'           => '',
@@ -204,6 +219,12 @@ function sh_notices_field_inject_after_n() {
                 . '</option>';
     }
     echo '</select>';
+}
+
+function sh_notices_field_go_to_archive_link_text() {
+    $v = get_option( 'sh_notices_go_to_archive_link_text' , '' );
+    echo '<input type="text" class="regular-text" name="sh_notices_go_to_archive_link_text" value="' . esc_attr( $v ) . '">';
+    echo '<p class="description">' . esc_html__( 'Shown as the link text on the archive link.', 'sh-notices' ) . '</p>';
 }
 
 function sh_notices_field_grid_heading() {
